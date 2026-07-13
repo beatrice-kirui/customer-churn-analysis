@@ -1,4 +1,4 @@
-# Phase-3-Project
+# Customer_Churn_Analysis
 
 ### Overview
 ![image](https://github.com/beatrice-kirui/Phase-3-Project/assets/124546863/23cb49da-c595-4124-b08f-e9b5c2efe70e)
