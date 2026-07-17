@@ -1,89 +1,256 @@
-# Customer_Churn_Analysis
+# Customer Churn Analysis
 
-### Overview
-![image](https://github.com/beatrice-kirui/Phase-3-Project/assets/124546863/23cb49da-c595-4124-b08f-e9b5c2efe70e)
- 
- This repository contains code for a machine learning project that analyzes a dataset of SyriaTel Customer Churn. The goal of this project is to analyze the dataset and develop a predictive model to identify factors that contribute to customer churn.By understanding these factors, the company can take proactive measures to reduce churn and improve customer retention. .
+## Project Summary
 
- ### Business Understanding:
- 
- Customer churn refers to the phenomenon of customers leaving or discontinuing their services with the company.
- 
- SyriaTel is a telecommunications company in Syria. They have realised that some of their customers have started to churn, discontinue their service.
+Customer churn is one of the most significant challenges faced by subscription-based businesses. Acquiring a new customer is often more expensive than retaining an existing one, making early identification of customers at risk of leaving a valuable business capability.
 
-This analysis will determine what features will indicate if a customer will ("soon") discontinue their service.By gaining insights into the factors contributing to churn, the company can take proactive measures to retain customers and improve customer loyalty.
+This project analyzes customer data from SyriaTel to identify the factors associated with customer churn and develops machine learning models capable of predicting customers who are likely to discontinue their services. The project follows a complete data science workflow, including exploratory data analysis, feature engineering, data preprocessing, model development, evaluation, and business recommendations.
 
-### Data Understanding:
+Among the models evaluated, the Random Forest classifier achieved the best performance with an **AUC score of 0.93**, demonstrating a strong ability to distinguish between customers who churn and those who remain.
 
-We used a dataset that contains relevant information about customers and their interactions with the company. The dataset includes features such as:-
+---
 
-1.CustomerID: Unique identifier for each customer.
+# Business Problem
 
-2.AccountLength: The length of time the customer has been with SyriaTel.
+SyriaTel has experienced customer attrition, leading to revenue loss and increased customer acquisition costs. The company requires a predictive solution that can identify customers at high risk of churning before they leave.
 
-3.InternationalPlan: Whether the customer has an international calling plan or not.
+By understanding the drivers of customer churn and building predictive machine learning models, the business can implement proactive retention strategies, improve customer satisfaction, and reduce revenue loss.
 
-4.VoiceMailPlan: Whether the customer has a voicemail plan or not.
+---
 
-5.NumberVmailMessages: The number of voicemail messages received by the customer.
+# Project Objectives
 
-6.TotalDayMinutes: Total number of minutes the customer used during the day.
+The objectives of this project were to:
 
-7.TotalEveMinutes: Total number of minutes the customer used during the evening.
+- Explore customer behavior using exploratory data analysis (EDA).
+- Identify factors associated with customer churn.
+- Prepare and preprocess data for machine learning.
+- Compare multiple classification algorithms.
+- Evaluate model performance using appropriate classification metrics.
+- Recommend business strategies to reduce customer churn.
 
-8.TotalNightMinutes: Total number of minutes the customer used during the night.
+---
 
-9.TotalIntlMinutes: Total number of international minutes used by the customer.
+# Dataset
 
-10.TotalDayCalls: Total number of calls made by the customer during the day.
+The dataset contains information for **3,333 SyriaTel customers** and includes customer demographics, account information, service plans, call usage, and customer service interactions.
 
-11.TotalEveCalls: Total number of calls made by the customer during the evening.
+### Target Variable
 
-12.TotalNightCalls: Total number of calls made by the customer during the night.
+- **Churn**
+    - 0 = Customer retained
+    - 1 = Customer churned
 
-13.TotalIntlCalls: Total number of international calls made by the customer.
+### Initial Class Distribution
 
-14.CustomerServiceCalls: Number of customer service calls made by the customer.
+|Class|Customers|
+|------|---------:|
+|Retained|2,850|
+|Churned|483|
 
-15.Churn: Binary indicator of whether the customer churned or not.Additionally, it provides a binary target variable indicating whether a customer has churned or not. The dataset consists of structured data, including numerical, categorical, and ordinal variables.
-        Explain your stakeholder audience and dataset choice here
-### Modeling
-![image](https://github.com/beatrice-kirui/Phase-3-Project/assets/124546863/49c3448f-4519-4268-a106-6d5cf83a0b5e)
+The dataset exhibited class imbalance, making it necessary to apply techniques that improve the model's ability to identify minority-class observations.
 
-* Out of 3,333 customers in the dataset ,483 have churned whereas 2850 have not churned.
-* The distribution shows class imbalance which we will address before modelling. 
+---
 
-![image](https://github.com/beatrice-kirui/Phase-3-Project/assets/124546863/ef59381e-b53a-4e55-8b17-a78dd4587785)
+# Tech Stack
 
-* All of the plots displayed above except 'customer service calls' plot show a normal distibution.
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Scikit-learn
+- imbalanced-learn (SMOTE)
+- Jupyter Notebook
 
-* Total international calls is skewed to the right but still is normally distributed.
+---
 
-![image](https://github.com/beatrice-kirui/Phase-3-Project/assets/124546863/65193bee-06cd-4181-9923-0f0ca495d059)
+# Data Preprocessing
 
-Based on the AUC scores above,the models can be ranked in terms of perfomance:
+Several preprocessing steps were performed before model development.
 
-    Random Forest: AUC = 0.93
-    Logistic Regression: AUC = 0.83
-    SVM: AUC = 0.72
-    K Nearest Neighbors (KNN): AUC = 0.67
+### Feature Engineering
 
-Based on the AUC scores, the Random Forest model appears to be the best-performing model among the four, followed by Logistic Regression, SVM, and KNN.
+Categorical variables were transformed into numerical features using **One-Hot Encoding**.
 
-### Evaluation of the Final Model.
+The following variables were encoded:
 
-  After refining and evaluating several models, the Random Forest classifier was selected as the final model for this problem.
+- State
+- Area Code
+- International Plan
+- Voice Mail Plan
 
-  The model underwent feature engineering, hyperparameter tuning, and cross-validation to optimize its performance.
+### Feature Scaling
 
-  The final model, a Random Forest classifier, achieved an impressive overall performance with an accuracy of 96.64%. This indicates that the model correctly classified the majority of instances in the test set. Additionally, the model exhibited perfect precision with a score of 1.0, meaning that all instances predicted as positive were indeed true positives. However, there is room for improvement in terms of recall, as the model captured only 74.77% of the actual positive instances.
+Numerical variables were scaled to improve model performance.
 
-  The F1-score, which combines precision and recall into a single metric, was found to be 0.8556701030927836. This suggests a balanced performance between the two, although recall appears to be the weaker aspect of the model's performance. Nonetheless, the weighted average F1-score of 0.96 demonstrates a high level of overall model performance.
+The project utilized:
 
-  
- In conclusion, the Random Forest model exhibited strong accuracy and precision, making it a reliable classifier. However, the model's lower recall indicates that it may not identify all positive instances accurately. It is crucial to consider the specific requirements and priorities of the problem at hand when interpreting these evaluation metrics and deciding on the final model. Further refinements could focus on improving the model's recall without sacrificing its high accuracy and precision.
+- StandardScaler
+- MinMaxScaler
 
+depending on the requirements of the machine learning algorithm.
 
-### Conclusion
+### Handling Class Imbalance
 
-In conclusion after analysis the dataset provided valuable insights and recommendations to improve customer retention strategies. Through the modeling and evaluation process, a predictive model was developed to identify customers who are likely to churn. The analysis revealed that several factors contribute to customer churn in the telecom industry. By analyzing the dataset and building the predictive model, it was found that features such as call duration, customer complaints, billing issues, and contract type play a significant role in predicting churn. The model showed promising performance in accurately identifying potential churners.
+The target variable was highly imbalanced:
+
+|Before SMOTE|Customers|
+|-------------|---------:|
+|Retained|2,850|
+|Churned|483|
+
+To prevent the models from becoming biased toward the majority class, the **Synthetic Minority Oversampling Technique (SMOTE)** was applied.
+
+After applying SMOTE:
+
+|After SMOTE|Customers|
+|-------------|---------:|
+|Retained|2,850|
+|Churned|2,850|
+
+This balanced dataset enabled the models to better learn patterns associated with customer churn.
+
+### Train-Test Split
+
+The dataset was divided into:
+
+- **75% Training**
+- **25% Testing**
+
+using:
+
+- `random_state = 123`
+
+---
+
+# Exploratory Data Analysis
+
+Exploratory Data Analysis was conducted to understand customer behavior, identify patterns, detect class imbalance, and explore relationships between variables.
+
+Key observations included:
+
+- The dataset was highly imbalanced.
+- Most numerical variables followed approximately normal distributions.
+- Customers with international plans and frequent customer service calls showed stronger associations with churn.
+- Call usage and customer interaction variables provided valuable predictive information.
+
+---
+
+# Model Development
+
+Four supervised machine learning models were developed and evaluated.
+
+- Logistic Regression
+- Random Forest
+- Support Vector Machine (SVM)
+- K-Nearest Neighbors (KNN)
+
+### Hyperparameter Tuning
+
+Logistic Regression was optimized using **GridSearchCV** with **5-fold cross-validation**.
+
+The following parameters were tuned:
+
+- Regularization strength (C)
+- Solver
+
+This helped identify the optimal model configuration before evaluation.
+
+---
+
+# Model Performance
+
+|Model|AUC Score|
+|------|---------:|
+|Random Forest|**0.93**|
+|Logistic Regression|0.83|
+|Support Vector Machine|0.72|
+|K-Nearest Neighbors|0.67|
+
+The Random Forest classifier produced the strongest predictive performance and was selected as the final model.
+
+---
+
+# Final Model Evaluation
+
+The Random Forest model achieved:
+
+- Accuracy: **96.64%**
+- Precision: **1.00**
+- Recall: **74.77%**
+- F1 Score: **0.86**
+
+The model demonstrated excellent overall performance while maintaining high precision. Although recall indicates that some churning customers were still missed, the model provides a reliable foundation for customer retention initiatives.
+
+---
+
+# Business Recommendations
+
+Based on the analysis, SyriaTel could reduce customer churn by:
+
+- Monitoring customers who make frequent customer service calls.
+- Identifying high-risk customers using the predictive model.
+- Developing targeted customer retention campaigns.
+- Reviewing service plans associated with higher churn.
+- Implementing proactive customer engagement before customers decide to leave.
+
+---
+
+# Repository Structure
+
+```
+
+customer-churn-analysis/
+│
+├── customer_churn_analysis.ipynb
+├── syria_churn.csv
+├── README.md
+├── documentation.pdf
+├── Notebook.pdf
+├── Presentation.pdf
+
+```
+
+---
+
+# How to Run the Project
+
+Clone the repository:
+
+```bash
+git clone https://github.com/beatrice-kirui/customer-churn-analysis.git
+```
+
+Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Launch Jupyter Notebook and open:
+
+```
+customer_churn_analysis.ipynb
+```
+
+---
+
+# Future Improvements
+
+Potential enhancements include:
+
+- Experimenting with XGBoost and LightGBM.
+- Optimizing recall for better identification of churning customers.
+- Deploying the model as a web application.
+- Building an interactive Power BI or Tableau dashboard.
+
+---
+
+# Author
+
+**Beatrice Kirui**
+
+Data Analyst | Python | SQL | Machine Learning | Data Visualization
+
+GitHub: https://github.com/beatrice-kirui
+LinkedIn: https://www.linkedin.com/in/beatrice-kirui-2a38a9205/
